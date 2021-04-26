@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'postCard.dart';
@@ -21,7 +22,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,44 +107,62 @@ class HomePage extends StatelessWidget {
   }
 
   Widget profileCard(String username, String picLink) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: Column(
-        children: <Widget>[
-          Stack(
-            alignment: Alignment.topRight,
+    return Material(
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => ProfilePage()));
+                                  //MaterialPageRoute
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          child: Column(
             children: <Widget>[
-              Container(
-                width: 70.0,
-                height: 70.0,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(width: 2.0, color: Colors.grey),
-                    borderRadius: BorderRadius.circular(35.0),
-                    image: DecorationImage(
-                        image: NetworkImage(picLink), fit: BoxFit.cover)),
+              Stack(
+                alignment: Alignment.topRight,
+                children: <Widget>[
+                  Container(
+                    width: 70.0,
+                    height: 70.0,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(width: 2.0, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(35.0),
+                        image: DecorationImage(
+                            image: NetworkImage(picLink), fit: BoxFit.cover)),
+                  ),
+                  Container(
+                    width: 20.0,
+                    height: 20.0,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(25.0),
+                        border: Border.all(width: 2.0, color: Colors.white)),
+                  )
+                ],
               ),
-              Container(
-                width: 20.0,
-                height: 20.0,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(25.0),
-                    border: Border.all(width: 2.0, color: Colors.white)),
+              SizedBox(
+                height: 4.0,
+              ),
+              Text(
+                username,
+                style: TextStyle(fontSize: 15.0, color: Colors.black),
               )
             ],
           ),
-          SizedBox(
-            height: 4.0,
-          ),
-          Text(
-            username,
-            style: TextStyle(fontSize: 15.0, color: Colors.black),
-          )
-        ],
+        ),
       ),
     );
   }
 }
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(child: FlatButton(onPressed: (){Navigator.pop(context);},child: Text("ADFAS"),)),
+    );
+  }
+}
+
 
 

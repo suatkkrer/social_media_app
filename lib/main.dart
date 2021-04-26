@@ -80,7 +80,21 @@ class HomePage extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          postCard()
+          postCard("https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+              "sfdasdf",
+              "sfasfdas",
+              "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+              "asfdasdfasfd"),
+          postCard("https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+              "sfdasdf",
+              "sfasfdas",
+              "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+              "asfdasdfasfd"),
+          postCard("https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+              "sfdasdf",
+              "sfasfdas",
+              "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+              "asfdasdfasfd")
         ],
       ),
     );

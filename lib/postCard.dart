@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class postCard extends StatelessWidget {
-  const postCard({
-    Key key,
-  }) : super(key: key);
+
+  final String profilePicUrl;
+  final String nameSurname;
+  final String time;
+  final String postPicUrl;
+  final String explanation;
+
+
+  postCard(this.profilePicUrl, this.nameSurname, this.time, this.postPicUrl,
+      this.explanation);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,7 @@ class postCard extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(15.0),
             width: double.infinity,
-            height: 380.0,
+            height: 390.0,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0), color: Colors.white),
             child: Column(
@@ -35,7 +42,8 @@ class postCard extends StatelessWidget {
                               color: Colors.indigo,
                               image: DecorationImage(
                                   image: NetworkImage(
-                                      "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg"),
+                                    profilePicUrl
+                                  ),
                                   fit: BoxFit.cover)),
                         ),
                         SizedBox(
@@ -45,7 +53,7 @@ class postCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Name Surname",
+                              nameSurname,
                               style: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.bold,
@@ -53,7 +61,7 @@ class postCard extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "1 hour ago",
+                              time,
                               style: TextStyle(
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.bold,
@@ -70,7 +78,7 @@ class postCard extends StatelessWidget {
                   height: 15.0,
                 ),
                 Text(
-                  "Explanation",
+                  explanation,
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.grey,
@@ -80,7 +88,7 @@ class postCard extends StatelessWidget {
                   height: 20.0,
                 ),
                 Image.network(
-                  "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+                  postPicUrl,
                   width: double.infinity,
                   height: 200.0,
                   fit: BoxFit.cover,
@@ -89,10 +97,15 @@ class postCard extends StatelessWidget {
                   height: 4.0,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    buttonWidget(Icons.favorite,"Like"),
-                    buttonWidget(Icons.comment,"Comment"),
-                    buttonWidget(Icons.share,"Share"),
+                    buttonWidget(Icons.favorite,"Like",(){}),
+                    buttonWidget(Icons.comment,"Comment",(){}),
+                    FlatButton.icon(onPressed: (){}, icon: Icon(Icons.share,color: Colors.grey,), label: Text("Share",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold
+                    ),),)
                   ],
                 )
               ],
@@ -106,12 +119,14 @@ class buttonWidget extends StatelessWidget {
 
   final IconData myIcons;
   final String myButtonName;
+  final myFunction;
 
-  buttonWidget(this.myIcons,this.myButtonName);
+  buttonWidget(this.myIcons,this.myButtonName, this.myFunction);
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.white,
       child: InkWell(
         onTap: () {},
         child: Container(
@@ -119,14 +134,14 @@ class buttonWidget extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(
-                Icons.favorite,
+                myIcons,
                 color: Colors.grey,
               ),
               SizedBox(
                 width: 8.0,
               ),
               Text(
-                "Like",
+                myButtonName,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,

@@ -55,7 +55,17 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
                 size: 32,
               ),
-              onPressed: () {})
+              onPressed: () {
+                showModalBottomSheet(context: context, builder: (BuildContext context){
+                  return Column(
+                    children: [
+                      announcement("Alice Followed You","3 mins ago"),
+                      announcement("Marta Commented Your Post","3 hours ago"),
+                      announcement("John Followed You","3 days ago")
+                    ],
+                  );
+                });
+              })
         ],
       ),
       body: ListView(
@@ -76,31 +86,31 @@ class _HomePageState extends State<HomePage> {
                   "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 ),
                 profileCard(
-                  "Michael",
+                  "Michasdfael",
                   "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                   "Michael",
                   "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 ),
                 profileCard(
-                  "Michael",
+                  "Michaasdffael",
                   "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png",
                   "Jessica",
                   "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png",
                 ),
                 profileCard(
-                  "Michael",
+                  "Michsfdaefl",
                   "https://data.whicdn.com/images/322027365/original.jpg?t=1541703413",
                   "Belma",
                   "https://data.whicdn.com/images/322027365/original.jpg?t=1541703413",
                 ),
                 profileCard(
-                  "Michael",
+                  "Michsafdaesl",
                   "https://organicthemes.com/demo/profile/files/2018/05/profile-pic.jpg",
                   "Clarke",
                   "https://organicthemes.com/demo/profile/files/2018/05/profile-pic.jpg",
                 ),
                 profileCard(
-                  "Michael",
+                  "Micasdfhael",
                   "https://sugardaddyaustralia.org/images/profiles/bellamy-1525963049224.jpg",
                   "Maggie",
                   "https://sugardaddyaustralia.org/images/profiles/bellamy-1525963049224.jpg",
@@ -131,7 +141,25 @@ class _HomePageState extends State<HomePage> {
               "asfdasdfasfd")
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        backgroundColor: Colors.purple[300],
+        child: Icon(Icons.add_a_photo, color: Colors.white,),
+      ),
     );
+  }
+
+  Padding announcement(String message, String time) {
+    return Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(message, style: TextStyle(fontSize: 15.0),),
+                          Text(time)
+                        ],
+                      ),
+                    );
   }
 
   Widget profileCard(
@@ -145,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (BuildContext context) =>
                       ProfilePage(nameSurname, username, themeLink, picLink)));
           //MaterialPageRoute
-          print(data);
+        //  print(data);
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),

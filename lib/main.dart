@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'ProfilePage.dart';
 import 'postCard.dart';
 
 void main() {
@@ -68,35 +69,62 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                profileCard("John",
-                    "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                profileCard("Michael",
-                    "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                profileCard("Jessica",
-                    "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png"),
-                profileCard("Belma",
-                    "https://data.whicdn.com/images/322027365/original.jpg?t=1541703413"),
-                profileCard("Clarke",
-                    "https://organicthemes.com/demo/profile/files/2018/05/profile-pic.jpg"),
-                profileCard("Maggie",
-                    "https://sugardaddyaustralia.org/images/profiles/bellamy-1525963049224.jpg")
+                profileCard(
+                  "John Ala",
+                  "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                  "John",
+                  "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                ),
+                profileCard(
+                  "Michael",
+                  "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                  "Michael",
+                  "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                ),
+                profileCard(
+                  "Michael",
+                  "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png",
+                  "Jessica",
+                  "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png",
+                ),
+                profileCard(
+                  "Michael",
+                  "https://data.whicdn.com/images/322027365/original.jpg?t=1541703413",
+                  "Belma",
+                  "https://data.whicdn.com/images/322027365/original.jpg?t=1541703413",
+                ),
+                profileCard(
+                  "Michael",
+                  "https://organicthemes.com/demo/profile/files/2018/05/profile-pic.jpg",
+                  "Clarke",
+                  "https://organicthemes.com/demo/profile/files/2018/05/profile-pic.jpg",
+                ),
+                profileCard(
+                  "Michael",
+                  "https://sugardaddyaustralia.org/images/profiles/bellamy-1525963049224.jpg",
+                  "Maggie",
+                  "https://sugardaddyaustralia.org/images/profiles/bellamy-1525963049224.jpg",
+                )
               ],
             ),
           ),
           SizedBox(
             height: 10.0,
           ),
-          postCard("https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+          postCard(
+              "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
               "sfdasdf",
               "sfasfdas",
               "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
               "asfdasdfasfd"),
-          postCard("https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+          postCard(
+              "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
               "sfdasdf",
               "sfasfdas",
               "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
               "asfdasdfasfd"),
-          postCard("https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
+          postCard(
+              "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
               "sfdasdf",
               "sfasfdas",
               "https://www.eagles.org/wp-content/uploads/2020/07/MG_6734-146-scaled.jpg",
@@ -106,12 +134,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget profileCard(String username, String picLink) {
+  Widget profileCard(
+      String username, String picLink, String nameSurname, String themeLink) {
     return Material(
       child: InkWell(
-        onTap: (){
-          Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => ProfilePage()));
-                                  //MaterialPageRoute
+        onTap: () async {
+          Future<dynamic> data = await Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (BuildContext context) =>
+                      ProfilePage(nameSurname, username, themeLink, picLink)));
+          //MaterialPageRoute
+          print(data);
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -120,15 +154,18 @@ class _HomePageState extends State<HomePage> {
               Stack(
                 alignment: Alignment.topRight,
                 children: <Widget>[
-                  Container(
-                    width: 70.0,
-                    height: 70.0,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(width: 2.0, color: Colors.grey),
-                        borderRadius: BorderRadius.circular(35.0),
-                        image: DecorationImage(
-                            image: NetworkImage(picLink), fit: BoxFit.cover)),
+                  Hero(
+                    tag: username,
+                    child: Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(width: 2.0, color: Colors.grey),
+                          borderRadius: BorderRadius.circular(35.0),
+                          image: DecorationImage(
+                              image: NetworkImage(picLink), fit: BoxFit.cover)),
+                    ),
                   ),
                   Container(
                     width: 20.0,
@@ -154,15 +191,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: FlatButton(onPressed: (){Navigator.pop(context);},child: Text("ADFAS"),)),
-    );
-  }
-}
-
-
-
